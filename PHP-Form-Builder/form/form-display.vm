@@ -19,9 +19,11 @@
 #end
 #set($validFormFields="#buildValidFormFieldsArray()")
 [system-view:external]
-<?php 
-  define("AUTH_FILE_PATH", "${formConfigContent.getChild('authFilePath').text}");
-  error_reporting(E_ALL);
+<?php
+    #if( $wayToSave.text == "save-to-excel" || $wayToSave.text == "save-to-cms")
+        define("AUTH_FILE_PATH", "${formConfigContent.getChild('authFilePath').text}");
+    #end
+    error_reporting(E_ALL);
   if (count($_POST) > 0) { //POSTED FORM, PROCESS IT
     $message = "";
     $subject = "${callingPageData.getChild('system-data-structure').getChild('ifEmailing').getChild('emailHeading').text}";
